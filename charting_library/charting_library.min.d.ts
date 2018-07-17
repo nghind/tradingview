@@ -819,6 +819,7 @@ export interface ISettingsAdapter {
 	removeValue(key: string): void;
 }
 export declare type IBasicDataFeed = IDatafeedChartApi & IExternalDatafeed;
+export declare type ThemeName = 'Light' | 'Dark';
 export interface ChartingLibraryWidgetOptions {
 	container_id: string;
 	datafeed: IBasicDataFeed | (IBasicDataFeed & IDatafeedQuotesApi);
@@ -860,6 +861,7 @@ export interface ChartingLibraryWidgetOptions {
 	save_load_adapter?: IExternalSaveLoadAdapter;
 	loading_screen?: LoadingScreenOptions;
 	settings_adapter?: ISettingsAdapter;
+	theme?: ThemeName;
 }
 export interface TradingTerminalWidgetOptions extends ChartingLibraryWidgetOptions {
 	brokerConfig?: SingleBrokerMetaInfo;
@@ -1317,6 +1319,7 @@ export interface IChartingLibraryWidget {
 	chartsCount(): number;
 	layout(): LayoutType;
 	setLayout(layout: LayoutType): void;
+	changeTheme(themeName: ThemeName): void;
 	takeScreenshot(): void;
 	lockAllDrawingTools(): IWatchedValue<boolean>;
 }
