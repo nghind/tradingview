@@ -200,8 +200,8 @@ export declare type DomeCallback = (data: DOMData) => void;
 export declare type ErrorCallback = (reason: string) => void;
 export interface IDatafeedChartApi {
 	calculateHistoryDepth?(resolution: ResolutionString, resolutionBack: ResolutionBackValues, intervalBack: number): HistoryDepth | undefined;
-	getMarks?(symbolInfo: LibrarySymbolInfo, startDate: number, endDate: number, onDataCallback: GetMarksCallback<Mark>, resolution: ResolutionString): void;
-	getTimescaleMarks?(symbolInfo: LibrarySymbolInfo, startDate: number, endDate: number, onDataCallback: GetMarksCallback<TimescaleMark>, resolution: ResolutionString): void;
+	getMarks?(symbolInfo: LibrarySymbolInfo, from: number, to: number, onDataCallback: GetMarksCallback<Mark>, resolution: ResolutionString): void;
+	getTimescaleMarks?(symbolInfo: LibrarySymbolInfo, from: number, to: number, onDataCallback: GetMarksCallback<TimescaleMark>, resolution: ResolutionString): void;
 	/**
 	 * This function is called if configuration flag supports_time is set to true when chart needs to know the server time.
 	 * The charting library expects callback to be called once.

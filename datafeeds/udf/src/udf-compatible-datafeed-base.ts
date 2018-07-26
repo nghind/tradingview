@@ -135,15 +135,15 @@ export class UDFCompatibleDatafeedBase implements IExternalDatafeed, IDatafeedQu
 		return undefined;
 	}
 
-	public getMarks(symbolInfo: LibrarySymbolInfo, startDate: number, endDate: number, onDataCallback: GetMarksCallback<Mark>, resolution: ResolutionString): void {
+	public getMarks(symbolInfo: LibrarySymbolInfo, from: number, to: number, onDataCallback: GetMarksCallback<Mark>, resolution: ResolutionString): void {
 		if (!this._configuration.supports_marks) {
 			return;
 		}
 
 		const requestParams: RequestParams = {
 			symbol: symbolInfo.ticker || '',
-			from: startDate,
-			to: endDate,
+			from: from,
+			to: to,
 			resolution: resolution,
 		};
 
@@ -174,15 +174,15 @@ export class UDFCompatibleDatafeedBase implements IExternalDatafeed, IDatafeedQu
 			});
 	}
 
-	public getTimescaleMarks(symbolInfo: LibrarySymbolInfo, startDate: number, endDate: number, onDataCallback: GetMarksCallback<TimescaleMark>, resolution: ResolutionString): void {
+	public getTimescaleMarks(symbolInfo: LibrarySymbolInfo, from: number, to: number, onDataCallback: GetMarksCallback<TimescaleMark>, resolution: ResolutionString): void {
 		if (!this._configuration.supports_timescale_marks) {
 			return;
 		}
 
 		const requestParams: RequestParams = {
 			symbol: symbolInfo.ticker || '',
-			from: startDate,
-			to: endDate,
+			from: from,
+			to: to,
 			resolution: resolution,
 		};
 
