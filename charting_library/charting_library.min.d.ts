@@ -1135,6 +1135,7 @@ export interface IChartWidgetApi {
 	onIntervalChanged(): ISubscription<(interval: ResolutionString, timeFrameParameters: {
 		timeframe?: string;
 	}) => void>;
+	onVisibleRangeChanged(): ISubscription<() => void>;
 	dataReady(callback: () => void): boolean;
 	crossHairMoved(callback: (params: CrossHairMovedEventParams) => void): void;
 	setVisibleRange(range: VisibleTimeRange, callback: () => void): void;
