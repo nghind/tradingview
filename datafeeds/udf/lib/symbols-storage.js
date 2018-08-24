@@ -1,7 +1,10 @@
 import { getErrorMessage, logMessage, } from './helpers';
-function extractField(data, field, arrayIndex) {
+function extractField(data, field, arrayIndex, valueIsArray) {
     var value = data[field];
-    return Array.isArray(value) ? value[arrayIndex] : value;
+    if (Array.isArray(value) && (!valueIsArray || Array.isArray(value[0]))) {
+        return value[arrayIndex];
+    }
+    return value;
 }
 var SymbolsStorage = /** @class */ (function () {
     function SymbolsStorage(datafeedUrl, datafeedSupportedResolutions, requester) {
@@ -143,10 +146,10 @@ var SymbolsStorage = /** @class */ (function () {
                     type: extractField(data, 'type', symbolIndex),
                     session: extractField(data, 'session-regular', symbolIndex),
                     timezone: extractField(data, 'timezone', symbolIndex),
-                    supported_resolutions: definedValueOrDefault(extractField(data, 'supported-resolutions', symbolIndex), this._datafeedSupportedResolutions),
+                    supported_resolutions: definedValueOrDefault(extractField(data, 'supported-resolutions', symbolIndex, true), this._datafeedSupportedResolutions),
                     force_session_rebuild: extractField(data, 'force-session-rebuild', symbolIndex),
                     has_daily: definedValueOrDefault(extractField(data, 'has-daily', symbolIndex), true),
-                    intraday_multipliers: definedValueOrDefault(extractField(data, 'intraday-multipliers', symbolIndex), ['1', '5', '15', '30', '60']),
+                    intraday_multipliers: definedValueOrDefault(extractField(data, 'intraday-multipliers', symbolIndex, true), ['1', '5', '15', '30', '60']),
                     has_weekly_and_monthly: extractField(data, 'has-weekly-and-monthly', symbolIndex),
                     has_empty_bars: extractField(data, 'has-empty-bars', symbolIndex),
                     volume_precision: definedValueOrDefault(extractField(data, 'volume-precision', symbolIndex), 0),
